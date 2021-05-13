@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "dev": "nodemon --watch './**/*.ts' --exec \"ts-node\" ./main/index.ts",
     "start": "ts-node index.ts",
     "build": "tsc"
   },
@@ -16,5 +17,11 @@
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.8",
+    "morgan": "^1.10.0"
   }
 }
