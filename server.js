@@ -1,36 +1,42 @@
-var express = require('express');
-var app = express();
-require('dotenv').config();
-const morgan= require('morgan')
+const express = require('express')
+const app =  express()
+const morgan = require('morgan')
 const helmet = require('helmet')
+require('dotenv').config()
+
+const port = process.env.PORT || 5500
 
 //app level middleware
-var port = process.env.PORT || 5500;
-app.use(helmet())
 app.use(morgan('common'))
 app.use(express.json())
+app.use(helmet())
 app.use(express.urlencoded({extended: true}))
 
 //connecting database
-var connectDB = require('./db.js');
-connectDB();
+const connectDB = require('./db')
+connectDB()
+
+//user designed routes
+const userRoute = require('./routes/user')
+const assistanceRoute = require('./routes/assistance_service')
+app.use('/api/v1/user', userRoute)
+app.use('/api/v1/assistance/',assistanceRoute)
 
 //webhooks
-const inboundHook = require('./webhooks/inbound')
-const statusHook = require('./webhooks/status')
-app.use('/webhooks',inboundHook)
-app.use('/webhooks', statusHook)
+const handleInbound = require('./webhooks/inbound')
+const handleStatus = require('./webhooks/status')
+app.use('/webhooks', handleInbound)
+app.use('/webhooks', handleStatus)
 
 app.get('/',(req,res)=>{
-    res.json({message: '/rentout chatbot server welcomwes you'})
+    res.send('tatenda bako')
 })
 
-//the listener
-app.listen(port, function (err) {
-    if (err) {
-        console.log(err);
+//literal listener
+app.listen(port,(err)=>{
+    if(err){
+        console.log(err)
+    }else{
+        console.log(`server up on port ${port}`)
     }
-    else {
-        console.log("Server up on port " + port);
-    }
-});
+})

@@ -1,17 +1,18 @@
 const mongoose = require('mongoose')
+const mongoUrl = process.env.mongoUrl
 
-const connectDB = () =>{
-    mongoose.connect(`mongodb://localhost:27017/chatBotDB`,{
-        useCreateIndex: true,
-        useNewUrlParser: true,
+const connectDB = (err) =>{
+    mongoose.connect(mongoUrl, {
+        useFindAndModify: true,
         useUnifiedTopology: true,
-        useFindAndModify:true
+        useCreateIndex: true,
+        useNewUrlParser: true
     })
-    mongoose.connection.once('open',(err)=>{
+    mongoose.connection.once('open', (err)=>{
         if(err){
             console.log(err)
         }else{
-            console.log('DAtabase connected sucessfully')
+            console.log(`database connected successfully`)
         }
     })
 }
