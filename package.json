@@ -5,9 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "nodemon --watch './**/*.ts' --exec \"ts-node\" ./main/index.ts",
-    "start": "ts-node index.ts",
-    "build": "tsc"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +18,16 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "dotenv": "^9.0.2",
+    "@vonage/server-sdk": "^2.10.7-beta-2",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.12.8",
+    "express-validator": "^6.10.1",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7",
     "morgan": "^1.10.0"
   }
 }
