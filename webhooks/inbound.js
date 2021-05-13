@@ -6,7 +6,7 @@ const router = express.Router()
 router.post('/inbound', async (req, res) => {
     try {
         // const { number } = req.body.from
-        // const { content } = req.body.message
+        const { content } = req.body.message
 
         // const assistance_types = await Assistance.find({})
         // let filledArray = new Array()
@@ -30,7 +30,7 @@ router.post('/inbound', async (req, res) => {
         //     sendWhatsappMessage(number, "how may i help you")
         // }
 
-        // console.log(content)
+        console.log(content)
         res.status(200).end()
 
     } catch (error) {
